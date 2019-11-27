@@ -2,7 +2,7 @@ FROM   registry.access.redhat.com/ubi8/ubi:8.0
 
 MAINTAINER   Red Hat Training <training@redhat.com>
 
-# command line options to pass to the JVM
+#Test command line options to pass to the JVM
 ENV	  JAVA_OPTIONS -Xmx512m
 
 
@@ -25,3 +25,4 @@ USER  1001
 
 # Run the fat JAR
 CMD   /opt/app-root/bin/run-app.sh
+
