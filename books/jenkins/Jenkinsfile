@@ -104,8 +104,9 @@ pipeline {
                     input message: "Promote to Staging?"
                 }
                 //TODO: Tag the books:latest image stream as books:stage
-		openshift.withCluster() {
+		openshift.withCluster() { 
 		openshift.tag("${DEV_PROJECT}/books:latest", "${STAGE_PROJECT}/books:stage")
+		}
             }
         }
 
@@ -140,6 +141,8 @@ pipeline {
 			def deployment = openshift.selector("dc", "${APP_NAME}").rollout()
 			openshift.selector("dc", "${APP_NAME}").related('pods').untilEac(1) {
 			return (it.object().status.phase == "Running")
+			}
+			}
                         echo "Deployment to Staging env is complete. Access the app at the URL http://${routeHost}."
                     }
                 }
